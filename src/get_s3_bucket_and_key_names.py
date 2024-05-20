@@ -10,8 +10,8 @@ def get_s3_bucket_and_key_names(input_json):
         input_json: target JSON string
 
     Returns:
-        s3_bucket: string matching name of S3 bucket
-        s3_key: string matching name of S3 key
+        s3_bucket:  string matching name of S3 bucket
+        s3_key:     string matching name of S3 key
     """
     try:
         input_json_as_object = json.loads(input_json)
