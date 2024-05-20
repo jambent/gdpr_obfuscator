@@ -9,7 +9,7 @@ def get_file_from_s3_bucket(bucket, key):
         bucket: target S3 bucket
         key:    target S3 file key
     Returns:
-        File
+        Requested file
     """
     try:
         s3 = boto3.client("s3", region_name="eu-west-2")

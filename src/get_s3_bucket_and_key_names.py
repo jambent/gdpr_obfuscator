@@ -25,4 +25,4 @@ def get_s3_bucket_and_key_names(input_json):
         return s3_bucket, s3_key
 
     except Exception as e:
-        print(f'Failure to read S3 bucket and key name from JSON: {e}')
+        print(f'Could not read S3 bucket and key name from JSON: {e}')

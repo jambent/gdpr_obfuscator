@@ -1,9 +1,5 @@
 from src.get_s3_bucket_and_key_names import get_s3_bucket_and_key_names
-
-test_json = """{
-    "file_to_obfuscate": "s3://my_ingestion_bucket/new_data/file1.csv",
-    "pii_fields": ["name", "email_address"]
-    }"""
+from test_json import test_json
 
 
 def test_that_2_strings_returned():
