@@ -1,7 +1,7 @@
 import boto3
 from moto import mock_aws
 import polars as pl
-from polars.testing import assert_frame_equal
+import polars.testing as pt
 
 
 from src.get_file_from_s3_bucket import get_file_from_s3_bucket
@@ -24,4 +24,4 @@ def test_that_csv_file_put_in_s3_can_be_retrieved_without_any_change():
                                                key="test_csv.csv")
     csv_file_from_s3_as_df = pl.read_csv(csv_file_from_s3["Body"])
 
-    assert_frame_equal(test_dataframe, csv_file_from_s3_as_df)
+    pt.assert_frame_equal(test_dataframe, csv_file_from_s3_as_df)
