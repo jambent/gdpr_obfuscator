@@ -4,8 +4,8 @@ import os
 import polars as pl
 import polars.testing as pt
 
-from src.obfuscate_csv_file import obfuscate_csv_file
-from src.get_file_object_from_s3_bucket import get_file_object_from_s3_bucket
+from obfuskator.src.obfuscate_csv_file import obfuscate_csv_file
+from obfuskator.src.get_file_object_from_s3_bucket import get_file_object_from_s3_bucket
 from test_data.test_dataframe import test_dataframe
 
 
