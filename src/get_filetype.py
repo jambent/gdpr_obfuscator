@@ -3,7 +3,7 @@ def get_filetype(filename):
     Extracts filetype from filename extension
 
     Args:
-        filename: target file
+        filename: target filename
     Returns:
         String of filetype
     Raises:

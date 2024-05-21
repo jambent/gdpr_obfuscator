@@ -1,41 +1,70 @@
+import boto3
+from moto import mock_aws
 import os
 import polars as pl
 import polars.testing as pt
 
 from src.obfuscate_csv_file import obfuscate_csv_file
+from src.get_file_object_from_s3_bucket import get_file_object_from_s3_bucket
 from test_data.test_dataframe import test_dataframe
 
 
+@mock_aws
 def test_that_csv_file_returned_is_not_equivalent_to_the_file_input():
+    s3 = boto3.client('s3', region_name="eu-west-2")
+    s3.create_bucket(Bucket="test_bucket",
+                     CreateBucketConfiguration={
+                            'LocationConstraint': "eu-west-2"
+                     }
+                     )
 
-    test_dataframe.write_csv("./test/test_data/test_csv.csv")
+    test_csv_file_object = test_dataframe.write_csv()
+    s3.put_object(
+        Bucket="test_bucket",
+        Key="test_csv.csv",
+        Body=test_csv_file_object)
+
+    csv_file_object_from_s3 = get_file_object_from_s3_bucket(
+        bucket="test_bucket", key="test_csv.csv")
     columns_for_obfuscation = ["name", "email_address"]
 
     obfuscate_csv_file(
-        "./test/test_data/test_csv.csv",
+        csv_file_object_from_s3,
         columns_for_obfuscation,
-        "./test/test_data/obfuscated_test_csv.csv")
+        "./test/test_data/obfuscated_test_csv.csv", "***")
     obfuscated_dataframe = (pl.read_csv
                             ("./test/test_data/obfuscated_test_csv.csv"))
 
     pt.assert_frame_not_equal(test_dataframe, obfuscated_dataframe)
 
     # Remove obfuscated CSV output file following completion of test
-    if os.path.isfile("./test/test_data/test_csv.csv"):
-        os.remove("./test/test_data/test_csv.csv")
     if os.path.isfile("./test/test_data/obfuscated_test_csv.csv"):
         os.remove("./test/test_data/obfuscated_test_csv.csv")
 
 
+@mock_aws
 def test_that_all_values_in_non_target_columns_remain_unchanged():
+    s3 = boto3.client('s3', region_name="eu-west-2")
+    s3.create_bucket(Bucket="test_bucket",
+                     CreateBucketConfiguration={
+                            'LocationConstraint': "eu-west-2"
+                     }
+                     )
 
-    test_dataframe.write_csv("./test/test_data/test_csv.csv")
+    test_csv_file_object = test_dataframe.write_csv()
+    s3.put_object(
+        Bucket="test_bucket",
+        Key="test_csv.csv",
+        Body=test_csv_file_object)
+
+    csv_file_object_from_s3 = get_file_object_from_s3_bucket(
+        bucket="test_bucket", key="test_csv.csv")
     columns_for_obfuscation = ["name", "email_address"]
 
     obfuscate_csv_file(
-        "./test/test_data/test_csv.csv",
+        csv_file_object_from_s3,
         columns_for_obfuscation,
-        "./test/test_data/obfuscated_test_csv.csv")
+        "./test/test_data/obfuscated_test_csv.csv", "***")
     obfuscated_dataframe = (pl.read_csv
                             ("./test/test_data/obfuscated_test_csv.csv"))
 
@@ -49,21 +78,33 @@ def test_that_all_values_in_non_target_columns_remain_unchanged():
                                     obfuscated_column_values))
 
     # Remove obfuscated CSV output file following completion of test
-    if os.path.isfile("./test/test_data/test_csv.csv"):
-        os.remove("./test/test_data/test_csv.csv")
     if os.path.isfile("./test/test_data/obfuscated_test_csv.csv"):
         os.remove("./test/test_data/obfuscated_test_csv.csv")
 
 
+@mock_aws
 def test_that_all_values_in_target_columns_made_equal_to_replacement_string():
+    s3 = boto3.client('s3', region_name="eu-west-2")
+    s3.create_bucket(Bucket="test_bucket",
+                     CreateBucketConfiguration={
+                            'LocationConstraint': "eu-west-2"
+                     }
+                     )
 
-    test_dataframe.write_csv("./test/test_data/test_csv.csv")
+    test_csv_file_object = test_dataframe.write_csv()
+    s3.put_object(
+        Bucket="test_bucket",
+        Key="test_csv.csv",
+        Body=test_csv_file_object)
+
+    csv_file_object_from_s3 = get_file_object_from_s3_bucket(
+        bucket="test_bucket", key="test_csv.csv")
     columns_for_obfuscation = ["name", "email_address"]
 
     obfuscate_csv_file(
-        "./test/test_data/test_csv.csv",
+        csv_file_object_from_s3,
         columns_for_obfuscation,
-        "./test/test_data/obfuscated_test_csv.csv")
+        "./test/test_data/obfuscated_test_csv.csv", "***")
     obfuscated_dataframe = (pl.read_csv
                             ("./test/test_data/obfuscated_test_csv.csv"))
 
@@ -79,7 +120,5 @@ def test_that_all_values_in_target_columns_made_equal_to_replacement_string():
                                 check_names=False))
 
     # Remove obfuscated CSV output file following completion of test
-    if os.path.isfile("./test/test_data/test_csv.csv"):
-        os.remove("./test/test_data/test_csv.csv")
     if os.path.isfile("./test/test_data/obfuscated_test_csv.csv"):
         os.remove("./test/test_data/obfuscated_test_csv.csv")
