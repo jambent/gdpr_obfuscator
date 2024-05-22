@@ -12,7 +12,7 @@ def obfuskate(input_json, replacement_string="***"):
     """
     Replaces all values within specified column/s, in file loaded from
     S3 bucket, with single replacement string, and writes resulting file
-    in the same file format
+    in the same file format as a streamable object
 
     Args:
         input_json: JSON string detailing "file_to_obfuscate" and "pii_fields"
