@@ -1,14 +1,14 @@
-from obfuskator.src.obfuskator.get_s3_bucket_and_key_names \
+from .get_s3_bucket_and_key_names \
     import get_s3_bucket_and_key_names
-from obfuskator.src.obfuskator.get_file_object_from_s3_bucket \
+from .get_file_object_from_s3_bucket \
     import get_file_object_from_s3_bucket
-from obfuskator.src.obfuskator.get_filetype import get_filetype
-from obfuskator.src.obfuskator.get_columns_to_be_obfuscated \
+from .get_filetype import get_filetype
+from .get_columns_to_be_obfuscated \
     import get_columns_to_be_obfuscated
-from obfuskator.src.obfuskator.obfuscate_csv_file import obfuscate_csv_file
+from .obfuscate_csv_file import obfuscate_csv_file
 
 
-def obfuskate(input_json, replacement_string="***"):
+def obfuscate(input_json, replacement_string="***"):
     """
     Replaces all values within specified column/s, in file loaded from
     S3 bucket, with single replacement string, and writes resulting file

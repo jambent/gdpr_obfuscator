@@ -4,7 +4,7 @@ import polars as pl
 import polars.testing as pt
 
 
-from obfuskator.src.obfuskator.get_file_object_from_s3_bucket \
+from src.obfsc8.get_file_object_from_s3_bucket \
     import get_file_object_from_s3_bucket
 from test_data.test_dataframe import test_dataframe
 
