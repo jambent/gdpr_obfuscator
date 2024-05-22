@@ -12,7 +12,7 @@ serverless-output.yaml
 **/.vscode
 **/*_cache
 **/*pycache
-*coverage*
+*coverage
 venv/
 utilities/
 .env

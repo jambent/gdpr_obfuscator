@@ -1,4 +1,5 @@
-from src.get_s3_bucket_and_key_names import get_s3_bucket_and_key_names
+from obfuskator.src.obfuskator.get_s3_bucket_and_key_names \
+    import get_s3_bucket_and_key_names
 from test_data.test_json import test_json
 
 
