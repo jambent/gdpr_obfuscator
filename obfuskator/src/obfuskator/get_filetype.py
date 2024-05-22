@@ -9,6 +9,7 @@ def get_filetype(filename):
     Raises:
         TypeError if filename is not a string
         ValueError if filename does not contain a period
+        ValueError if determined filetype is not CSV
     """
     if not isinstance(filename, str):
         raise TypeError('Input filename must be a string')
@@ -18,7 +19,12 @@ def get_filetype(filename):
     try:
         filename_split_on_period = filename.split('.')
         filetype = filename_split_on_period[-1]
-        return filetype
 
     except Exception as e:
         print(f'Failed to extract filetype from filename: {e}')
+
+    if filetype not in ['csv']:
+        raise ValueError(
+            f'Filetype {filetype} not recognised.  Filetype must be CSV.')
+
+    return filetype
