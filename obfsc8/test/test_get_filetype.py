@@ -1,6 +1,6 @@
 import pytest
 
-from src.obfuskator.get_filetype import get_filetype
+from src.obfsc8.get_filetype import get_filetype
 
 filename = "new_data/file1.csv"
 
