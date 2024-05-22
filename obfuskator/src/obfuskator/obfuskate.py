@@ -26,8 +26,6 @@ def obfuskate(input_json, replacement_string="***"):
                             specified PII fields (default = "***")
     Returns:
         BytesIO object containing obfuscated file data
-        Name of S3 bucket that original file was retrieved from
-        Key of original file retrieved from S3
     """
 
     s3_bucket_name, s3_key_name = get_s3_bucket_and_key_names(input_json)
@@ -41,4 +39,4 @@ def obfuskate(input_json, replacement_string="***"):
                                                     columns_to_be_obfuscated,
                                                     replacement_string))
 
-        return transformed_file_data, s3_bucket_name, s3_key_name
+        return transformed_file_data
