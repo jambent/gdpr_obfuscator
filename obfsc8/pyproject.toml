@@ -1,7 +1,7 @@
 [project]
 name = "obfsc8"
-version = "0.0.1"
-description = "Enables the easy obfuscation of Personally Identifiable Information (PII) within CSV files"
+version = "0.0.2"
+description = "Easy obfuscation of Personally Identifiable Information (PII) within CSV files"
 classifiers = ["License :: OSI Approved :: MIT License"]
 readme = "README.md"
 requires-python = ">=3.8"

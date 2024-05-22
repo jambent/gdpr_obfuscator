@@ -1,11 +1,11 @@
-from obfsc8.get_s3_bucket_and_key_names \
+from .get_s3_bucket_and_key_names \
     import get_s3_bucket_and_key_names
-from obfsc8.get_file_object_from_s3_bucket \
+from .get_file_object_from_s3_bucket \
     import get_file_object_from_s3_bucket
-from obfsc8.get_filetype import get_filetype
-from obfsc8.get_columns_to_be_obfuscated \
+from .get_filetype import get_filetype
+from .get_columns_to_be_obfuscated \
     import get_columns_to_be_obfuscated
-from obfsc8.obfuscate_csv_file import obfuscate_csv_file
+from .obfuscate_csv_file import obfuscate_csv_file
 
 
 def obfuscate(input_json, replacement_string="***"):
