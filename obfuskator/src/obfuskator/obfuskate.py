@@ -7,7 +7,7 @@ from obfuskator.get_columns_to_be_obfuscated \
 from obfuskator.obfuscate_csv_file import obfuscate_csv_file
 
 
-def obfuskate(input_json, output_filepath="/tmp", replacement_string="***"):
+def obfuskate(input_json, replacement_string="***"):
     """
     Replaces all values within specified column/s, in file loaded from
     S3 bucket, with single replacement string, and writes resulting file
@@ -21,9 +21,6 @@ def obfuskate(input_json, output_filepath="/tmp", replacement_string="***"):
         "pii_fields": ["name", "email_address"]
         }'
 
-        output_filepath: filepath where obfuscated file is written to
-                        (default = /tmp)
-
         replacement_string: string to be used to replace all values in the
                             specified PII fields (default = "***")
 
@@ -35,5 +32,7 @@ def obfuskate(input_json, output_filepath="/tmp", replacement_string="***"):
     columns_to_be_obfuscated = get_columns_to_be_obfuscated(input_json)
 
     if filetype == "csv":
-        (obfuscate_csv_file(retrieved_file_object, columns_to_be_obfuscated,
-                            output_filepath, replacement_string))
+        transformed_file_data = (obfuscate_csv_file(retrieved_file_object,
+                                                    columns_to_be_obfuscated,
+                                                    replacement_string))
+        return transformed_file_data

@@ -18,7 +18,12 @@ def get_filetype(filename):
     try:
         filename_split_on_period = filename.split('.')
         filetype = filename_split_on_period[-1]
-        return filetype
 
     except Exception as e:
         print(f'Failed to extract filetype from filename: {e}')
+
+    if filetype not in ['csv']:
+        raise ValueError(
+            f'Filetype {filetype} not recognised.  Filetype must be CSV.')
+
+    return filetype
