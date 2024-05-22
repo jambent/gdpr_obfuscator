@@ -25,3 +25,8 @@ def test_that_type_error_raised_if_input_filename_not_a_string():
 def test_that_value_error_raised_if_period_not_present_in_filename():
     with pytest.raises(ValueError, match="must contain a period"):
         get_filetype("new_data/file1")
+
+
+def test_that_value_error_raised_if_filetype_not_CSV():
+    with pytest.raises(ValueError, match="Filetype must be CSV"):
+        get_filetype("new_data/file1.jpg")

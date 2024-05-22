@@ -27,7 +27,7 @@ def obfuscate_csv_file(csv_file_object,
         obfuscated_csv_df = csv_obfuscation_operation.collect()
         buffer = io.BytesIO()
         obfuscated_csv_df.write_csv(buffer)
-        buffer.seek[0]
+        buffer.seek(0)
 
         return buffer
 

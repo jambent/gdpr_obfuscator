@@ -1,10 +1,11 @@
-from obfuskator.get_s3_bucket_and_key_names import get_s3_bucket_and_key_names
-from obfuskator.get_file_object_from_s3_bucket \
+from obfuskator.src.obfuskator.get_s3_bucket_and_key_names \
+    import get_s3_bucket_and_key_names
+from obfuskator.src.obfuskator.get_file_object_from_s3_bucket \
     import get_file_object_from_s3_bucket
-from obfuskator.get_filetype import get_filetype
-from obfuskator.get_columns_to_be_obfuscated \
+from obfuskator.src.obfuskator.get_filetype import get_filetype
+from obfuskator.src.obfuskator.get_columns_to_be_obfuscated \
     import get_columns_to_be_obfuscated
-from obfuskator.obfuscate_csv_file import obfuscate_csv_file
+from obfuskator.src.obfuskator.obfuscate_csv_file import obfuscate_csv_file
 
 
 def obfuskate(input_json, replacement_string="***"):
@@ -23,8 +24,12 @@ def obfuskate(input_json, replacement_string="***"):
 
         replacement_string: string to be used to replace all values in the
                             specified PII fields (default = "***")
-
+    Returns:
+        BytesIO object containing obfuscated file data
+        Name of S3 bucket that original file was retrieved from
+        Key of original file retrieved from S3
     """
+
     s3_bucket_name, s3_key_name = get_s3_bucket_and_key_names(input_json)
     retrieved_file_object = (get_file_object_from_s3_bucket
                              (s3_bucket_name, s3_key_name))
@@ -35,4 +40,5 @@ def obfuskate(input_json, replacement_string="***"):
         transformed_file_data = (obfuscate_csv_file(retrieved_file_object,
                                                     columns_to_be_obfuscated,
                                                     replacement_string))
-        return transformed_file_data
+
+        return transformed_file_data, s3_bucket_name, s3_key_name

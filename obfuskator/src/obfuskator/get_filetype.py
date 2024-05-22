@@ -9,6 +9,7 @@ def get_filetype(filename):
     Raises:
         TypeError if filename is not a string
         ValueError if filename does not contain a period
+        ValueError if determined filetype is not CSV
     """
     if not isinstance(filename, str):
         raise TypeError('Input filename must be a string')
