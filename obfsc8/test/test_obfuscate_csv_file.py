@@ -3,8 +3,8 @@ from moto import mock_aws
 import polars as pl
 import polars.testing as pt
 
-from src.obfsc8.obfuscate_csv_file import obfuscate_csv_file
-from src.obfsc8.get_file_object_from_s3_bucket \
+from obfsc8.src.obfsc8.obfuscate_csv_file import obfuscate_csv_file
+from obfsc8.src.obfsc8.get_file_object_from_s3_bucket \
     import get_file_object_from_s3_bucket
 from test_data.test_dataframe import test_dataframe
 
