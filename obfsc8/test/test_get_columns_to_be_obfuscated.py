@@ -1,4 +1,4 @@
-from src.obfsc8.get_columns_to_be_obfuscated \
+from obfsc8.src.obfsc8.get_columns_to_be_obfuscated \
     import get_columns_to_be_obfuscated
 from test_data.test_json import test_json
 
