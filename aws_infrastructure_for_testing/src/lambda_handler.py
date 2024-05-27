@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     buffer = ob.obfuscate(obfuscation_instructions)
     s3 = boto3.client("s3", region_name="eu-west-2")
     put_response = (s3.put_object(
-        Bucket="obfuscator-destination-bucket-84628959687373",
+        Bucket="test_bucket",
         Key="test_csv.csv", Body=buffer))
             
     return {

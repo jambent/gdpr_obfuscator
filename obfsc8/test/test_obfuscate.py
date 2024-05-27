@@ -1,5 +1,4 @@
 import pytest
-from mock import patch
 
 from obfsc8.src.obfsc8.obfuscate import obfuscate
 from obfsc8.src.obfsc8.obfuscate_csv_file \
@@ -37,8 +36,8 @@ def test_that_BytesIO_object_returned(csv_from_s3):
 
 
 @pytest.mark.skip
-#@patch(get_s3_bucket_and_key_names,return_values="test_bucket")
+# @patch(get_s3_bucket_and_key_names,return_values="test_bucket")
 def test_failure_for_more_than_2_arguments(
-    mock_s3_bucket_and_key_names, csv_from_s3):
+        mock_s3_bucket_and_key_names, csv_from_s3):
     s3_bucket, s3_key = get_s3_bucket_and_key_names(test_json)
     assert s3_bucket == 'test_bucket'

@@ -8,7 +8,7 @@ from .get_columns_to_be_obfuscated \
 from .obfuscate_csv_file import obfuscate_csv_file
 
 
-def obfuscate(input_json, replacement_string="***"):
+def obfuscate(input_json, restricted_fields=[], replacement_string="***"):
     """
     Replaces all values within specified column/s, in file loaded from
     S3 bucket, with single replacement string, and writes resulting file
@@ -22,6 +22,9 @@ def obfuscate(input_json, replacement_string="***"):
         "pii_fields": ["name", "email_address"]
         }'
 
+        restricted_fields: list of fields that cannot be overwritten,
+                            regardless of contents of input_json (default = [])
+
         replacement_string: string to be used to replace all values in the
                             specified PII fields (default = "***")
     Returns:
@@ -32,7 +35,8 @@ def obfuscate(input_json, replacement_string="***"):
     retrieved_file_object = (get_file_object_from_s3_bucket
                              (s3_bucket_name, s3_key_name))
     filetype = get_filetype(s3_key_name)
-    columns_to_be_obfuscated = get_columns_to_be_obfuscated(input_json)
+    columns_to_be_obfuscated = (get_columns_to_be_obfuscated
+                                (input_json, restricted_fields))
 
     if filetype == "csv":
         transformed_file_data = (obfuscate_csv_file(retrieved_file_object,
