@@ -15,13 +15,9 @@ pip install obfsc8
 The obfsc8 package has one associated function:  
 
 **obfsc8.obfuscate**(  
-
     ***input_json***: str,  
-
     ***restricted_fields***: list = [],  
-
     ***replacement_string***: str = "***"  
-
 )  
 
 
