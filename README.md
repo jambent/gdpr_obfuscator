@@ -1,7 +1,6 @@
-## obfsc8
-The **obfsc8** package provides a simple way to obfuscate specific fields within CSV and Parquet files that are stored in the Amazon S3 service.
-Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that
-can be easily processed, for example by the boto3 S3.Client.put_object function.
+# obfsc8
+The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV and Parquet files that are stored in the Amazon S3 service.
+Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that can be easily processed, for example by the boto3 S3.Client.put_object function.
 
 
 ## Setup
@@ -10,8 +9,8 @@ Install the latest version of obfsc8 with:
 pip install obfsc8
 ```
 
-## Usage
-# Function parameters
+## obfsc8 methods
+### Function parameters
 The obfsc8 package has one associated function: 
 **obfsc8.obfuscate**( 
     ***input_json***: str, 
@@ -44,9 +43,12 @@ The obfsc8 package has one associated function:
     **replacement_string**
         String used to obfuscate all row values for the fields identified in the "pii_fields" key of the input_json parameter, barring inclusion of each field in the restricted_fields parameter list.  Defaults to the string "***".
 
+**Returns**
+    BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV or Parquet).
 
 
-# Amazon Lambda Layer creation
+## Amazon Lambda Usage
+### Amazon Lambda Layer creation
 If using this package within an Amazon Lambda instance, first create a Lambda Layer containing it:
 ```
 mkdir obfsc8
@@ -63,7 +65,7 @@ Note that due to the current size of the obfsc8 package, it is not possible for 
 It is however possible to have an obfsc8 Layer and a boto3 Layer loaded at the same time.
 If you wish to use boto3 within an Amazon Lambda, create an additional boto3 Lambda Layer by repeating the steps above, but replacing "obfsc8" with "boto3", and uploading the resulting .zip to the Lambda as a Lambda Layer.
 
-# Amazon Lambda lambda_handler example code
+### Amazon Lambda lambda_handler example code
 The following is an example of possible usage of obfsc8 within an Amazon Lambda, with boto3 handling the writing of the obfuscated file data to an S3 bucket: 
 ```
 import json
