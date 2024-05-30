@@ -6,7 +6,6 @@ from obfsc8.src.obfsc8.obfuscate_csv_file \
 from obfsc8.src.obfsc8.get_s3_bucket_and_key_names \
     import get_s3_bucket_and_key_names
 
-
 test_json = """{
     "file_to_obfuscate": "s3://test_bucket/test_csv.csv",
     "pii_fields": ["name", "email_address"]
