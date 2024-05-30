@@ -22,29 +22,31 @@ The obfsc8 package has one associated function:
 
 
 **Parameters**
-    
     **input_json**
-        JSON string with the following format:
+    JSON string with the following format:  
+
         ```
         {
             "file_to_obfuscate": "s3://...",
             "pii_fields": ["...", ...]
         }
-        ```
-        For example, the following requests that the "name" and "email_address" fields be obfuscated in the S3 file found at s3://my_ingestion_bucket/new_data/file1.csv: 
+        ```  
+
+    For example, the following requests that the "name" and "email_address" fields be obfuscated in the S3 file found at s3://my_ingestion_bucket/new_data/file1.csv: 
+        
         ```
         {
             "file_to_obfuscate": "s3://my_ingestion_bucket/new_data/file1.csv",
             "pii_fields": ["name", "email_address"]
         }
-        ```
+        ```  
 
     **restricted_fields**
-        List of protected fields that will not be obfuscated, even if they appear in the 
-        "pii_fields" key of the input_json parameter.  Defaults to an empty list.
+    List of protected fields that will not be obfuscated, even if they appear in the 
+    "pii_fields" key of the input_json parameter.  Defaults to an empty list.
 
     **replacement_string**
-        String used to obfuscate all row values for the fields identified in the "pii_fields" key of the input_json parameter, barring inclusion of each field in the restricted_fields parameter list.  Defaults to the string "***".
+    String used to obfuscate all row values for the fields identified in the "pii_fields" key of the input_json parameter, barring inclusion of each field in the restricted_fields parameter list.  Defaults to the string "***".
 
 **Returns**
     BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV or Parquet).  
