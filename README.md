@@ -21,7 +21,7 @@ The obfsc8 package has one associated function:
 )  
 
 
-**Parameters**  
+### Parameters 
 
 **input_json**
 JSON string with the following format:  
@@ -47,8 +47,8 @@ List of protected fields that will not be obfuscated, even if they appear in the
 
 **replacement_string**
     String used to obfuscate all row values for the fields identified in the "pii_fields" key of the input_json parameter, barring inclusion of each field in the restricted_fields parameter list.  Defaults to the string "***".  
-    
-**Returns**
+
+### Returns
     BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV or Parquet).  
 
   
