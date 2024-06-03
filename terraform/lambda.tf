@@ -3,7 +3,7 @@ resource "aws_lambda_function" "gdpr_obfuscator" {
   role          = aws_iam_role.gdpr_obfuscator_lambda_role.arn
   s3_bucket     = aws_s3_bucket.gdpr_obfuscator_lambda_code_bucket.id
   s3_key        = aws_s3_object.gdpr_obfuscator_lambda_code.key
-  handler       = "gdpr_obfuscator.lambda_handler"
+  handler       = "lambda_handler.lambda_handler"
   runtime       = "python3.11"
   timeout       = 60
   layers = [
