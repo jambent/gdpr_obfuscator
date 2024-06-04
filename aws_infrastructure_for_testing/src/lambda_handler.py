@@ -1,4 +1,5 @@
 import json
+import os
 import boto3
 import obfsc8 as ob
 
@@ -15,8 +16,9 @@ def lambda_handler(event, context):
         obfuscated_file_key = ("/").join(source_filepath_elements[3:])
 
         s3 = boto3.client("s3", region_name="eu-west-2")
+        bucket = os.environ['DESTINATION_S3_ID']
         (s3.put_object(
-            Bucket="test_bucket",
+            Bucket=bucket,
             Key=obfuscated_file_key, Body=buffer))
 
         return {'statusCode': 200, 'body': json.dumps(

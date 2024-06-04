@@ -6,6 +6,12 @@ resource "aws_lambda_function" "gdpr_obfuscator" {
   handler       = "lambda_handler.lambda_handler"
   runtime       = "python3.11"
   timeout       = 60
+  environment {
+    variables = {
+      "DESTINATION_S3_ID"          = aws_s3_bucket.gdpr_obfuscator_destination_bucket.id,
+      "DESTINATION_S3_ARN"         = aws_s3_bucket.gdpr_obfuscator_destination_bucket.arn
+    }
+  }
   layers = [
             aws_lambda_layer_version.obfsc8_layer.arn,
             aws_lambda_layer_version.boto3_layer.arn
