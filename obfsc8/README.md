@@ -1,5 +1,5 @@
 # obfsc8
-The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV and Parquet files that are stored in the Amazon S3 service.
+The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV, Parquet and JSON files that are stored in the Amazon S3 service.
 Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that can be easily processed, for example by the boto3 S3.Client.put_object function.  
   
 
@@ -49,7 +49,7 @@ List of protected fields that will not be obfuscated, even if they appear in the
     String used to obfuscate all row values for the fields identified in the "pii_fields" key of the input_json parameter, barring inclusion of each field in the restricted_fields parameter list.  Defaults to the string "***".  
 
 ### Returns
-BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV or Parquet).  
+BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV, Parquet or JSON).  
 
   
 
