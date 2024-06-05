@@ -1,28 +1,28 @@
 import polars as pl
 import polars.testing as pt
 
-from obfsc8.src.obfsc8.obfuscate_csv_file import obfuscate_csv_file
+from obfsc8.src.obfsc8.obfuscate_json_file import obfuscate_json_file
 from test_data.test_dataframe import test_dataframe
 
 
 columns_for_obfuscation = ["name", "email_address"]
 
 
-def test_that_csv_file_returned_is_not_equivalent_to_the_file_input(
-        csv_from_s3):
+def test_that_json_file_returned_is_not_equivalent_to_the_file_input(
+        json_from_s3):
 
-    buffer = obfuscate_csv_file(
-        csv_from_s3, columns_for_obfuscation, "***")
-    obfuscated_dataframe = pl.read_csv(buffer)
+    buffer = obfuscate_json_file(
+        json_from_s3, columns_for_obfuscation, "***")
+    obfuscated_dataframe = pl.read_json(buffer)
 
     pt.assert_frame_not_equal(test_dataframe, obfuscated_dataframe)
 
 
-def test_that_all_values_in_non_target_columns_remain_unchanged(csv_from_s3):
+def test_that_all_values_in_non_target_columns_remain_unchanged(json_from_s3):
 
-    buffer = obfuscate_csv_file(
-        csv_from_s3, columns_for_obfuscation, "***")
-    obfuscated_dataframe = pl.read_csv(buffer)
+    buffer = obfuscate_json_file(
+        json_from_s3, columns_for_obfuscation, "***")
+    obfuscated_dataframe = pl.read_json(buffer)
 
     for column_name in obfuscated_dataframe.columns:
         if column_name not in columns_for_obfuscation:
@@ -35,11 +35,11 @@ def test_that_all_values_in_non_target_columns_remain_unchanged(csv_from_s3):
 
 
 def test_that_all_values_in_target_columns_made_equal_to_replacement_string(
-        csv_from_s3):
+        json_from_s3):
 
-    buffer = obfuscate_csv_file(
-        csv_from_s3, columns_for_obfuscation, "***")
-    obfuscated_dataframe = pl.read_csv(buffer)
+    buffer = obfuscate_json_file(
+        json_from_s3, columns_for_obfuscation, "***")
+    obfuscated_dataframe = pl.read_json(buffer)
 
     obfuscated_column_values_list = []
     for column_name in columns_for_obfuscation:
@@ -55,11 +55,11 @@ def test_that_all_values_in_target_columns_made_equal_to_replacement_string(
         assert obfuscated_column_values_list[0][j] == "***"
 
 
-def test_that_custom_string_leaves_non_target_columns_unchanged(csv_from_s3):
+def test_that_custom_string_leaves_non_target_columns_unchanged(json_from_s3):
 
-    buffer = obfuscate_csv_file(
-        csv_from_s3, columns_for_obfuscation, "??")
-    obfuscated_dataframe = pl.read_csv(buffer)
+    buffer = obfuscate_json_file(
+        json_from_s3, columns_for_obfuscation, "??")
+    obfuscated_dataframe = pl.read_json(buffer)
 
     for column_name in obfuscated_dataframe.columns:
         if column_name not in columns_for_obfuscation:
@@ -72,11 +72,11 @@ def test_that_custom_string_leaves_non_target_columns_unchanged(csv_from_s3):
 
 
 def test_that_custom_replacement_string_replaces_values_in_target_columns(
-        csv_from_s3):
+        json_from_s3):
 
-    buffer = obfuscate_csv_file(
-        csv_from_s3, columns_for_obfuscation, "??")
-    obfuscated_dataframe = pl.read_csv(buffer)
+    buffer = obfuscate_json_file(
+        json_from_s3, columns_for_obfuscation, "??")
+    obfuscated_dataframe = pl.read_json(buffer)
 
     obfuscated_column_values_list = []
     for column_name in columns_for_obfuscation:

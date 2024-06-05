@@ -27,17 +27,17 @@ for i in range(0, 10000):
     data.loc[i, "email_address"] = fake.email()
 
 (data.to_json(
-    "./utility_generated_data/one_mb_faked_index_oriented_json.json", 
-    orient = "index"))
+    "./utility_generated_data/one_mb_faked_index_oriented_json.json",
+    orient="index"))
 (data.to_json(
-    "./utility_generated_data/one_mb_faked_columns_oriented_json.json", 
-    orient = "columns"))
+    "./utility_generated_data/one_mb_faked_columns_oriented_json.json",
+    orient="columns"))
 (data.to_json(
-    "./utility_generated_data/one_mb_faked_records_oriented_json.json", 
-    index=False, orient = "records"))
+    "./utility_generated_data/one_mb_faked_records_oriented_json.json",
+    index=False, orient="records"))
 (data.to_json(
-    "./utility_generated_data/one_mb_faked_table_oriented_json.json", 
-    index=False, orient = "table"))
+    "./utility_generated_data/one_mb_faked_table_oriented_json.json",
+    index=False, orient="table"))
 
 
 data = pd.DataFrame(
@@ -63,8 +63,8 @@ for i in range(0, 13800):
 
 
 (data.to_json(
-    "./utility_generated_data/one_mb_faked_split_oriented_json.json", 
-    index=False, orient = "split"))
+    "./utility_generated_data/one_mb_faked_split_oriented_json.json",
+    index=False, orient="split"))
 (data.to_json(
-    "./utility_generated_data/one_mb_faked_values_oriented_json.json", 
-    index=False, orient = "values"))
+    "./utility_generated_data/one_mb_faked_values_oriented_json.json",
+    index=False, orient="values"))
