@@ -46,7 +46,7 @@ def test_that_all_values_in_target_columns_made_equal_to_replacement_string(
         obfuscated_column_values = (obfuscated_dataframe
                                     .get_column(column_name))
         obfuscated_column_values_list.append(obfuscated_column_values)
-        print(obfuscated_column_values_list)
+
     for i in range(1, len(obfuscated_column_values_list)):
         (pt.assert_series_equal(obfuscated_column_values_list[0],
                                 obfuscated_column_values_list[i],
@@ -83,7 +83,7 @@ def test_that_custom_replacement_string_replaces_values_in_target_columns(
         obfuscated_column_values = (obfuscated_dataframe
                                     .get_column(column_name))
         obfuscated_column_values_list.append(obfuscated_column_values)
-        print(obfuscated_column_values_list)
+
     for i in range(1, len(obfuscated_column_values_list)):
         (pt.assert_series_equal(obfuscated_column_values_list[0],
                                 obfuscated_column_values_list[i],

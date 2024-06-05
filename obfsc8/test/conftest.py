@@ -49,3 +49,26 @@ def parquet_from_s3():
         bucket="test_bucket", key="test_parquet.parquet")
 
     return parquet_file_object_from_s3
+
+
+@pytest.fixture()
+@mock_aws
+def json_from_s3():
+    s3 = boto3.client('s3', region_name="eu-west-2")
+    s3.create_bucket(Bucket="test_bucket",
+                     CreateBucketConfiguration={
+                            'LocationConstraint': "eu-west-2"
+                     }
+                     )
+    buffer = io.BytesIO()
+    test_dataframe.write_json(buffer)
+    buffer.seek(0)
+    s3.put_object(
+        Bucket="test_bucket",
+        Key="test_json.json",
+        Body=buffer)
+
+    json_file_object_from_s3 = get_file_object_from_s3_bucket(
+        bucket="test_bucket", key="test_json.json")
+
+    return json_file_object_from_s3
