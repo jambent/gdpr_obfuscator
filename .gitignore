@@ -17,3 +17,4 @@ venv/
 utility_generated_data/
 .env
 .terraform*
+obfuscated_records_json.json
