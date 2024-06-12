@@ -51,7 +51,46 @@ List of protected fields that will not be obfuscated, even if they appear in the
 ### Returns
 BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV, Parquet or JSON).  
 
-  
+## Example usage 
+Consider a CSV file within an S3 bucket.  boto3 can be used to download this data, and pandas to put the file data into a dataframe which can be displayed easily:
+
+```
+>>> import boto3
+>>> import pandas as pd
+
+>>> s3 = boto3.client("s3", region_name="eu-west-2")
+>>> get_s3_file_object = s3.get_object(Bucket="test-bucket", Key="test_data.csv")["Body"]
+
+>>> df = pd.read_csv(get_s3_file_object)
+>>> print(df.head())
+   student_id                    name    course  cohort graduation_date             email_address
+0         208      Miss Debra Roberts     Cloud    2023      2042-09-19       keith11@example.net
+1        2989  Miss Charlene Marshall      Data    2018      2040-12-01         ngray@example.com
+2        8473       Mrs Olivia Rahman     Cloud    2039      2033-07-14      rosstony@example.org
+3        6289              Sarah Cole     Cloud    2033      2023-09-19       chloe33@example.org
+4        1960          Julian Elliott  Software    2022      2043-01-20  harrisgerard@example.org
+
+```
+obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate required fields, by defining the S3 filepath and fields list inside the JSON string that is passed into the obfuscate method.  A file object is returned, which can similarly be displayed as a Pandas dataframe : 
+```
+>>> import obfsc8 as ob
+
+>>> test_json = """{
+...     "file_to_obfuscate": "s3://test-bucket/test_data.csv",
+...     "pii_fields": ["name", "email_address"]
+...     }"""
+
+>>> buffer = ob.obfuscate(test_json)
+>>> df = pd.read_csv(buffer)
+>>> print(df.head())
+
+   student_id name    course  cohort graduation_date email_address
+0         208  ***     Cloud    2023      2042-09-19           ***
+1        2989  ***      Data    2018      2040-12-01           ***
+2        8473  ***     Cloud    2039      2033-07-14           ***
+3        6289  ***     Cloud    2033      2023-09-19           ***
+4        1960  ***  Software    2022      2043-01-20           ***
+```
 
 ## Amazon Lambda Usage
 ### Amazon Lambda Layer creation
