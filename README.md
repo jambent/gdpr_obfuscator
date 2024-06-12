@@ -71,7 +71,7 @@ Consider a CSV file within an S3 bucket.  boto3 can be used to download this dat
 4        1960          Julian Elliott  Software    2022      2043-01-20  harrisgerard@example.org
 
 ```
-obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate required fields, by defining the S3 filepath and fields list inside the JSON string that is passed into the obfuscate method.  A file object is returned, which can similarly be displayed as a Pandas dataframe : 
+obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate required fields, by defining the S3 filepath and fields list inside the JSON string that is passed into the obfuscate method.  A file object is returned, which can similarly be displayed as a pandas dataframe: 
 ```
 >>> import obfsc8 as ob
 
@@ -91,7 +91,7 @@ obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate requir
 3        6289  ***     Cloud    2033      2023-09-19           ***
 4        1960  ***  Software    2022      2043-01-20           ***
 ```
-
+### restricted_fields
 The optional restricted_fields parameter can be used to protect key fields from obfuscation, even if the input JSON string contains those fields within the "pii_fields" list.  In the following example the "student_id" field is successfully prevented from being obfuscated, despite its inclusion in the JSON string:
 ```
 >>> test_json = """{
@@ -110,7 +110,7 @@ The optional restricted_fields parameter can be used to protect key fields from 
 3        6289  ***     Cloud    2033      2023-09-19           ***
 4        1960  ***  Software    2022      2043-01-20           ***
 ```
-
+### replacement_string
 The optional replacement_string parameter can be used to change the string used for obfuscation from the default "***".  The following example shows how a "?" string can be used for obfuscation instead:
 ```
 >>> test_json = """{
