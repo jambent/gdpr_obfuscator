@@ -92,6 +92,44 @@ obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate requir
 4        1960  ***  Software    2022      2043-01-20           ***
 ```
 
+The optional restricted_fields parameter can be used to protect key fields from obfuscation, even if the input JSON string contains those fields within the "pii_fields" list.  In the following example the "student_id" field is successfully prevented from being obfuscated, despite its inclusion in the JSON string:
+```
+>>> test_json = """{
+...     "file_to_obfuscate": "s3://test-bucket/test_data.csv",
+...     "pii_fields": ["student_id", "name", "email_address"]
+...     }"""
+
+>>> buffer = ob.obfuscate(test_json, restricted_fields = ["student_id"])
+>>> df = pd.read_csv(buffer)
+>>> print(df.head())
+
+   student_id name    course  cohort graduation_date email_address
+0         208  ***     Cloud    2023      2042-09-19           ***
+1        2989  ***      Data    2018      2040-12-01           ***
+2        8473  ***     Cloud    2039      2033-07-14           ***
+3        6289  ***     Cloud    2033      2023-09-19           ***
+4        1960  ***  Software    2022      2043-01-20           ***
+```
+
+The optional replacement_string parameter can be used to change the string used for obfuscation from the default "***".  The following example shows how a "?" string can be used for obfuscation instead:
+```
+>>> test_json = """{
+...     "file_to_obfuscate": "s3://test-bucket/test_data.csv",
+...     "pii_fields": ["name", "email_address"]
+...     }"""
+
+>>> buffer = ob.obfuscate(test_json, replacement_string = "?")
+>>> df = pd.read_csv(buffer)
+>>> print(df.head())
+
+   student_id name    course  cohort graduation_date email_address
+0         208    ?     Cloud    2023      2042-09-19             ?
+1        2989    ?      Data    2018      2040-12-01             ?
+2        8473    ?     Cloud    2039      2033-07-14             ?
+3        6289    ?     Cloud    2033      2023-09-19             ?
+4        1960    ?  Software    2022      2043-01-20             ?
+```
+
 ## Amazon Lambda Usage
 ### Amazon Lambda Layer creation
 If using this package within an Amazon Lambda instance, first create a Lambda Layer containing it:
