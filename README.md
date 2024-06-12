@@ -1,5 +1,5 @@
 # obfsc8
-The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV,  Parquet and JSON files that are stored in the Amazon S3 service.
+The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV,  Parquet and record-oriented JSON files that are stored in the Amazon S3 service.
 Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that can be easily processed, for example by the boto3 S3.Client.put_object function.  
   
 
@@ -49,7 +49,13 @@ List of protected fields that will not be obfuscated, even if they appear in the
     String used to obfuscate all row values for the fields identified in the "pii_fields" key of the input_json parameter, barring inclusion of each field in the restricted_fields parameter list.  Defaults to the string "***".  
 
 ### Returns
-BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV, Parquet or JSON).  
+BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV, Parquet or JSON).
+
+## JSON limitations
+Although this package works with CSV, Parquet and JSON files, only record-oriented JSON is currently compatible.  This type of JSON is structured as a list of dictionaries, each dictionary corresponding to one row of an equivalent Dataframe.  An example of this type of JSON is as follows:
+```
+[{"student_id":7914,"name":"Dr Geoffrey Pearce","course":"Data","cohort":2027,"graduation_date":"2027-11-19","email_address":"georgiaarmstrong@example.org"},{"student_id":9225,"name":"Rosemary Lees","course":"Data","cohort":2034,"graduation_date":"2034-05-22","email_address":"elizabethbarker@example.net"},{"student_id":6977,"name":"Miss Barbara Butler","course":"Cloud","cohort":2023,"graduation_date":"2023-01-18","email_address":"bakernathan@example.org"},{"student_id":2565,"name":"Owen Bennett","course":"Cloud","cohort":2021,"graduation_date":"2021-08-30","email_address":"declankelly@example.org"}]
+```
 
 ## Example usage 
 Consider a CSV file within an S3 bucket.  boto3 can be used to download this data, and pandas to put the file data into a dataframe which can be displayed easily:
