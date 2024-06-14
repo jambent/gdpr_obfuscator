@@ -1,6 +1,6 @@
 [project]
 name = "obfsc8"
-version = "0.0.6"
+version = "0.0.7"
 description = "Easy obfuscation of Personally Identifiable Information (PII) within Amazon S3 files"
 classifiers = ["License :: OSI Approved :: MIT License"]
 readme = "README.md"
