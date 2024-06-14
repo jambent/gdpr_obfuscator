@@ -27,7 +27,7 @@ def obfuscate_json_file(json_file_object,
         obfuscated_json_df = json_obfuscation_operation.collect()
 
         buffer = io.BytesIO()
-        obfuscated_json_df.write_json(buffer)
+        obfuscated_json_df.write_json(buffer, row_oriented=True)
         buffer.seek(0)
 
         return buffer
