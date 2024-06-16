@@ -8,7 +8,10 @@ from test_data.test_dataframe import test_dataframe
 
 def test_that_csv_file_results_in_csv_bytes_object(s3_client, test_bucket):
     test_csv = test_dataframe.write_csv()
-    s3_client.put_object(Bucket="test_bucket", Key="test_csv.csv", Body=test_csv)
+    s3_client.put_object(
+        Bucket="test_bucket",
+        Key="test_csv.csv",
+        Body=test_csv)
 
     test_csv_json = """{
     "file_to_obfuscate": "s3://test_bucket/test_csv.csv",
@@ -20,7 +23,8 @@ def test_that_csv_file_results_in_csv_bytes_object(s3_client, test_bucket):
     assert isinstance(df, pd.DataFrame)
 
 
-def test_that_parquet_file_results_in_parquet_bytes_object(s3_client, test_bucket):
+def test_that_parquet_file_results_in_parquet_bytes_object(
+        s3_client, test_bucket):
     test_parquet = io.BytesIO()
     test_dataframe.write_parquet(test_parquet)
     test_parquet.seek(0)
