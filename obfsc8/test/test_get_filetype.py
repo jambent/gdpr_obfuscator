@@ -10,25 +10,19 @@ def test_that_string_returned():
     assert isinstance(result, str)
 
 
-def test_that_csv_returned_with_csv_file_input():
-    csv_filename = "new_data/file1.csv"
-    result = get_filetype(csv_filename)
+@pytest.mark.parametrize("filename, expected",
+                         [("new_data/file1.csv",
+                           "csv"),
+                          ("new_data/file1.parquet",
+                           "parquet"),
+                             ("new_data/file1.json",
+                              "json")])
+def test_correct_filetype_returned_for_all_expected_filetypes(
+        filename,
+        expected):
+    result = get_filetype(filename)
 
-    assert result == "csv"
-
-
-def test_that_parquet_returned_with_parquet_file_input():
-    parquet_filename = "new_data/file1.parquet"
-    result = get_filetype(parquet_filename)
-
-    assert result == "parquet"
-
-
-def test_that_json_returned_with_json_file_input():
-    parquet_filename = "new_data/file1.json"
-    result = get_filetype(parquet_filename)
-
-    assert result == "json"
+    assert result == expected
 
 
 def test_that_type_error_raised_if_input_filename_not_a_string():

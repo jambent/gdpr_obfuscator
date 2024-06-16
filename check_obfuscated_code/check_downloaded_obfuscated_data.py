@@ -11,8 +11,8 @@ if __name__ == "__main__":
 
     obfuscated_data_bucket = config("DESTINATION_S3_BUCKET")
     file_to_download = "obfs_one_mb_faked_data.csv"
-    #file_to_download = "obfs_one_mb_faked_data.parquet"
-    #file_to_download = "obfs_one_mb_faked_records_oriented_json.json"
+    # file_to_download = "obfs_one_mb_faked_data.parquet"
+    # file_to_download = "obfs_one_mb_faked_records_oriented_json.json"
     filetype = get_filetype(file_to_download)
 
     retrieved_file_object = (get_file_object_from_s3_bucket(

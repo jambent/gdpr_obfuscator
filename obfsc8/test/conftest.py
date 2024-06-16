@@ -61,7 +61,7 @@ def json_from_s3():
                      }
                      )
     buffer = io.BytesIO()
-    test_dataframe.write_json(buffer)
+    test_dataframe.write_json(buffer, row_oriented=True)
     buffer.seek(0)
     s3.put_object(
         Bucket="test_bucket",
