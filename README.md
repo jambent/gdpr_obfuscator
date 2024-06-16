@@ -3,11 +3,11 @@
 The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV,  Parquet and record-oriented JSON files that are stored in the Amazon S3 service.
 Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that can be easily processed, for example by the boto3 S3.Client.put_object function.  
 
-- [Setup](##Setup)
+- [Setup](##setup)
 - [obfsc8 functions](##obfsc8-functions)
-- [JSON limitations](##JSON-limitations)
-- [Example usage](##Example-usage)
-- [Amazon Lambda Usage](##Amazon-Lambda-usage)
+- [JSON limitations](##json-limitations)
+- [Example usage](##example-usage)
+- [Amazon Lambda Usage](##amazon-lambda-usage)
 
 
 ## Setup
@@ -108,7 +108,7 @@ obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate requir
 3        6289  ***     Cloud    2033      2023-09-19           ***
 4        1960  ***  Software    2022      2043-01-20           ***
 ```
-The obfuscated data within the variable "buffer" could be written to an S3 bucket using the boto3 package.  See [here](###Amazon-Lambda-lambda_handler-example-code) for an example of how this could be achieved using the S3.Client.put_object function.
+The obfuscated data within the variable "buffer" could be written to an S3 bucket using the boto3 package.  See [here](###amazon-lambda-lambda_handler-example-code) for an example of how this could be achieved using the S3.Client.put_object function.
 ### restricted_fields
 The optional restricted_fields parameter can be used to protect key fields from obfuscation, even if the input JSON string contains those fields within the "pii_fields" list.  In the following example the "student_id" field is successfully prevented from being obfuscated, despite its inclusion in the JSON string:
 ```
