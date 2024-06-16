@@ -58,13 +58,13 @@ List of protected fields that will not be obfuscated, even if they appear in the
 BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV, Parquet or JSON).
 
 ## JSON limitations
-Although this package works with CSV, Parquet and JSON files, only record-oriented JSON is currently compatible.  This type of JSON is structured as a list of dictionaries, each dictionary corresponding to one row of an equivalent Dataframe.  An example of this type of JSON is as follows:
+Although this package works with CSV, Parquet and JSON files, only record-oriented JSON is currently compatible.  This type of JSON is structured as a list of dictionaries, each dictionary corresponding to one row of an equivalent DataFrame.  An example of this type of JSON is as follows:
 ```
 [{"student_id":7914,"name":"Dr Geoffrey Pearce","course":"Data","cohort":2027,"graduation_date":"2027-11-19","email_address":"georgiaarmstrong@example.org"},{"student_id":9225,"name":"Rosemary Lees","course":"Data","cohort":2034,"graduation_date":"2034-05-22","email_address":"elizabethbarker@example.net"},{"student_id":6977,"name":"Miss Barbara Butler","course":"Cloud","cohort":2023,"graduation_date":"2023-01-18","email_address":"bakernathan@example.org"},{"student_id":2565,"name":"Owen Bennett","course":"Cloud","cohort":2021,"graduation_date":"2021-08-30","email_address":"declankelly@example.org"}]
 ```
 
 ## Example usage
-Consider a CSV file within an S3 bucket.  boto3 can be used to download this data, and pandas to put the file data into a dataframe which can be displayed easily:
+Consider a CSV file within an S3 bucket.  boto3 can be used to download this data, and pandas to put the file data into a DataFrame which can be displayed easily:
 
 ```
 >>> import boto3
@@ -83,7 +83,7 @@ Consider a CSV file within an S3 bucket.  boto3 can be used to download this dat
 4        1960          Julian Elliott  Software    2022      2043-01-20  harrisgerard@example.org
 
 ```
-obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate required fields, by defining the S3 filepath and fields list inside the JSON string that is passed into the obfuscate method.  A file object is returned, which can similarly be displayed as a pandas dataframe: 
+obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate required fields, by defining the S3 filepath and fields list inside the JSON string that is passed into the obfuscate function.  A file object is returned, which can similarly be displayed as a pandas DataFrame: 
 ```
 >>> import obfsc8 as ob
 
@@ -144,7 +144,7 @@ The optional replacement_string parameter can be used to change the string used 
 
 ## Amazon Lambda usage
 ### Amazon Lambda Layer creation
-If using this package within an Amazon Lambda instance, first create a Lambda Layer containing it:
+If using this package within an Amazon Lambda instance, first create a Lambda Layer that contains the package:
 ```
 mkdir obfsc8
 cd obfsc8
@@ -158,7 +158,7 @@ The resulting obfsc8_layer.zip file should be uploaded to the Amazon Lambda inst
 
 Note that due to the current size of the obfsc8 package, it is not possible for an Amazon Lambda to have an obfsc8 Layer and an AWS SDK Layer loaded at the same time.
 It is however possible to have an obfsc8 Layer and a boto3 Layer loaded at the same time.
-If you wish to use boto3 within an Amazon Lambda, create an additional boto3 Lambda Layer by repeating the steps above, but replacing "obfsc8" with "boto3", and uploading the resulting .zip to the Lambda as a Lambda Layer.  
+If you wish to use boto3 within an Amazon Lambda, create an additional boto3 Lambda Layer by repeating the steps above, but replacing "obfsc8" with "boto3", and uploading the resulting .zip file to the Lambda as a Lambda Layer.  
 
 
 ### Amazon Lambda lambda_handler example code
