@@ -64,6 +64,7 @@ Although this package works with CSV, Parquet and JSON files, only record-orient
 ```
 
 ## Example usage
+#### CSV
 Consider a fictional CSV file within the Amazon S3 service, with key name "test_data.csv" inside a bucket that has the name "test-bucket".  This file contains data about students attending software engineering bootcamp courses.  boto3 can be used to download this file, and pandas to put the file data into a DataFrame which can be displayed easily.  First, install the boto3 and pandas packages:
 ```
 pip install boto3
@@ -107,6 +108,7 @@ obfsc8 can be used to load this CSV file from the S3 bucket and obfuscate requir
 3        6289  ***     Cloud    2033      2023-09-19           ***
 4        1960  ***  Software    2022      2043-01-20           ***
 ```
+The obfuscated data within the variable "buffer" could be written to an S3 bucket using the boto3 package.  See [here](###Amazon-Lambda-lambda_handler-example-code) for an example of how this could be achieved using the S3.Client.put_object function.
 ### restricted_fields
 The optional restricted_fields parameter can be used to protect key fields from obfuscation, even if the input JSON string contains those fields within the "pii_fields" list.  In the following example the "student_id" field is successfully prevented from being obfuscated, despite its inclusion in the JSON string:
 ```
