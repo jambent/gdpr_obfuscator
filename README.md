@@ -2,7 +2,12 @@
 # obfsc8
 The **obfsc8** package provides a simple way to obfuscate Personally Identifiable Information (PII) found within CSV,  Parquet and record-oriented JSON files that are stored in the Amazon S3 service.
 Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that can be easily processed, for example by the boto3 S3.Client.put_object function.  
-  
+
+- [Setup](##Setup)
+- [obfsc8 functions](##obfsc8 functions)
+- [JSON limitations](##JSON limitations)
+- [Example usage](##Example usage)
+- [Amazon Lambda Usage](##Amazon Lambda Usage)
 
 
 ## Setup
@@ -12,7 +17,7 @@ pip install obfsc8
 ```  
   
 
-## obfsc8 methods
+## obfsc8 functions
 The obfsc8 package has one associated function:  
 
 **obfsc8.obfuscate**(  
