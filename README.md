@@ -4,10 +4,10 @@ The **obfsc8** package provides a simple way to obfuscate Personally Identifiabl
 Designed to be used within Amazon Lambda, EC2 and ECS services, **obfsc8** returns a bytes object of the obfuscated file data that can be easily processed, for example by the boto3 S3.Client.put_object function.  
 
 - [Setup](##Setup)
-- [obfsc8 functions](##obfsc8 functions)
-- [JSON limitations](##JSON limitations)
-- [Example usage](##Example usage)
-- [Amazon Lambda Usage](##Amazon Lambda Usage)
+- [obfsc8 functions](##obfsc8-functions)
+- [JSON limitations](##JSON-limitations)
+- [Example usage](##Example-usage)
+- [Amazon Lambda Usage](##Amazon-Lambda-usage)
 
 
 ## Setup
@@ -63,7 +63,7 @@ Although this package works with CSV, Parquet and JSON files, only record-orient
 [{"student_id":7914,"name":"Dr Geoffrey Pearce","course":"Data","cohort":2027,"graduation_date":"2027-11-19","email_address":"georgiaarmstrong@example.org"},{"student_id":9225,"name":"Rosemary Lees","course":"Data","cohort":2034,"graduation_date":"2034-05-22","email_address":"elizabethbarker@example.net"},{"student_id":6977,"name":"Miss Barbara Butler","course":"Cloud","cohort":2023,"graduation_date":"2023-01-18","email_address":"bakernathan@example.org"},{"student_id":2565,"name":"Owen Bennett","course":"Cloud","cohort":2021,"graduation_date":"2021-08-30","email_address":"declankelly@example.org"}]
 ```
 
-## Example usage 
+## Example usage
 Consider a CSV file within an S3 bucket.  boto3 can be used to download this data, and pandas to put the file data into a dataframe which can be displayed easily:
 
 ```
@@ -142,7 +142,7 @@ The optional replacement_string parameter can be used to change the string used 
 4        1960    ?  Software    2022      2043-01-20             ?
 ```
 
-## Amazon Lambda Usage
+## Amazon Lambda usage
 ### Amazon Lambda Layer creation
 If using this package within an Amazon Lambda instance, first create a Lambda Layer containing it:
 ```
