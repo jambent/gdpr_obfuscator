@@ -51,7 +51,7 @@ List of protected fields that will not be obfuscated, even if they appear in the
 BytesIO object containing obfuscated file data in the same file format as the input file defined in input_json (CSV, Parquet or JSON).
 
 ## JSON limitations
-Although this package works with CSV, Parquet and JSON files, only record-oriented JSON is currently compatible.  This type of JSON is structured as a list of dictionaries, each dictionary corresponding to one row of an equivalent pandas DataFrame (see below for DataFrame creation examples).  An example of this type of JSON is as follows:
+Although this package works with JSON files, only record-oriented JSON is currently compatible.  This type of JSON is structured as a list of dictionaries, each dictionary corresponding to one row of an equivalent pandas DataFrame (see below for DataFrame creation examples).  An example of this type of JSON is as follows:
 ```
 [{"student_id":7914,"name":"Dr Geoffrey Pearce","course":"Data","cohort":2027,"graduation_date":"2027-11-19","email_address":"georgiaarmstrong@example.org"},{"student_id":9225,"name":"Rosemary Lees","course":"Data","cohort":2034,"graduation_date":"2034-05-22","email_address":"elizabethbarker@example.net"},{"student_id":6977,"name":"Miss Barbara Butler","course":"Cloud","cohort":2023,"graduation_date":"2023-01-18","email_address":"bakernathan@example.org"},{"student_id":2565,"name":"Owen Bennett","course":"Cloud","cohort":2021,"graduation_date":"2021-08-30","email_address":"declankelly@example.org"}]
 ```
