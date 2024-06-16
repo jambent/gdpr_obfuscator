@@ -10,8 +10,8 @@ from obfsc8.src.obfsc8.get_filetype import get_filetype
 if __name__ == "__main__":
 
     obfuscated_data_bucket = config("DESTINATION_S3_BUCKET")
-    file_to_download = "obfs_one_mb_faked_data.csv"
-    # file_to_download = "obfs_one_mb_faked_data.parquet"
+    #file_to_download = "obfs_one_mb_faked_data.csv"
+    file_to_download = "obfs_one_mb_faked_data.parquet"
     # file_to_download = "obfs_one_mb_faked_records_oriented_json.json"
     filetype = get_filetype(file_to_download)
 
