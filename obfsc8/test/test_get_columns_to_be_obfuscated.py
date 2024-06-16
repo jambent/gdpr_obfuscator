@@ -20,9 +20,15 @@ def test_that_list_contains_correct_column_names():
 
     assert result == ["name", "email_address"]
 
-@pytest.mark.parametrize("restricted_fields, expected",[(["student_id"],["name", "email_address"]),([],["student_id", "name", "email_address"])])
-def test_that_restricted_fields_correctly_removed_from_column_names(restricted_fields, expected):
+
+@pytest.mark.parametrize(
+    "restricted_fields, expected", [
+        (["student_id"], [
+            "name", "email_address"]), ([], [
+                "student_id", "name", "email_address"])])
+def test_that_restricted_fields_correctly_removed_from_column_names(
+        restricted_fields, expected):
     result = (get_columns_to_be_obfuscated
-               (test_json_targeting_student_id, restricted_fields))
+              (test_json_targeting_student_id, restricted_fields))
 
     assert result == expected

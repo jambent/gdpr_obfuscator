@@ -16,6 +16,7 @@ def test_that_parquet_file_returned_is_equivalent_to_input_if_not_obfuscated(
 
     pt.assert_frame_equal(test_dataframe, obfuscated_dataframe)
 
+
 def test_that_parquet_file_returned_is_not_equivalent_if_obfuscated(
         parquet_from_s3):
     columns_for_obfuscation = ["name", "email_address"]
@@ -25,7 +26,17 @@ def test_that_parquet_file_returned_is_not_equivalent_if_obfuscated(
 
     pt.assert_frame_not_equal(test_dataframe, obfuscated_dataframe)
 
-@pytest.mark.parametrize("columns_for_obfuscation, replacement_string",[(["name", "email_address"],"***"),(["cohort"],"??"),(["student_id","name","graduation_date"],"")])
+
+@pytest.mark.parametrize("columns_for_obfuscation, replacement_string",
+                         [(["name",
+                            "email_address"],
+                           "***"),
+                          (["cohort"],
+                           "??"),
+                             (["student_id",
+                               "name",
+                               "graduation_date"],
+                              "")])
 def test_that_all_values_in_non_target_columns_remain_unchanged(
         columns_for_obfuscation, replacement_string, parquet_from_s3):
 
@@ -42,7 +53,17 @@ def test_that_all_values_in_non_target_columns_remain_unchanged(
             (pt.assert_series_equal(original_column_values,
                                     obfuscated_column_values))
 
-@pytest.mark.parametrize("columns_for_obfuscation, replacement_string",[(["name", "email_address"],""),(["cohort"],"***"),(["student_id","name","graduation_date"],"??")])
+
+@pytest.mark.parametrize("columns_for_obfuscation, replacement_string",
+                         [(["name",
+                            "email_address"],
+                           ""),
+                          (["cohort"],
+                           "***"),
+                             (["student_id",
+                               "name",
+                               "graduation_date"],
+                              "??")])
 def test_that_all_values_in_target_columns_made_equal_to_replacement_string(
         columns_for_obfuscation, replacement_string, parquet_from_s3):
 

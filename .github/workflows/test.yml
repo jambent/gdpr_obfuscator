@@ -38,4 +38,4 @@ jobs:
         python -m pytest
     - name: Check coverage
       run: |
-        coverage run --omit 'venv/*','*test*','__init__.py','obfuscate.py' -m pytest && coverage report -m --fail-under=90
+        coverage run --omit='venv/*','*test*','__init__.py','obfuscate.py' -m pytest && coverage report -m --fail-under=90

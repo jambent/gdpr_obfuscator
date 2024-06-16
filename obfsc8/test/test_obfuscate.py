@@ -11,6 +11,7 @@ from test_data.test_dataframe import test_dataframe
 @mock_aws
 def test_that_csv_file_results_in_csv_bytes_object():
     s3 = boto3.client('s3', region_name="eu-west-2")
+
     s3.create_bucket(Bucket="test_bucket",
                      CreateBucketConfiguration={
                             'LocationConstraint': "eu-west-2"
